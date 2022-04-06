@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(name: params[:name], email: params[:email])
+    # user = User.new(name: params[:name], email: params[:email])
+    user = User.new(user_params)
 
     if user.save
       redirect_to "/users/#{user.id}"
@@ -36,5 +37,11 @@ class UsersController < ApplicationController
   def movie_show
     @user = User.find(params[:id])
     @movie = MovieFacade.details(params[:movie_id])
+  end
+
+  private
+
+  def user_params
+    params.permit(:name, :email, :password, :password_confirmation)
   end
 end

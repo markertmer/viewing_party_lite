@@ -39,6 +39,23 @@ class UsersController < ApplicationController
     @movie = MovieFacade.details(params[:movie_id])
   end
 
+  def login_form
+  end
+
+  def login_user
+    user = User.where(email: params[:email])[0]
+
+    if user == nil
+      redirect_to "/login"
+      flash[:alert] = "ERROR: Email not found"
+    elsif user.authenticate(params[:password])
+      redirect_to "/users/#{user.id}"
+    else
+      redirect_to "/login"
+      flash[:alert] = "ERROR: Incorrect password"
+    end
+  end
+
   private
 
   def user_params

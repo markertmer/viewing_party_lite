@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'discover movies', type: :feature do
   describe 'happy paths' do
     it 'has the specified info' do
-      user = User.create(name: "Jill Jillian", email: "jill@gmail.com")
+      user = User.create(name: "Jill Jillian", email: "jill@gmail.com", password: "13qe987(*&)")
       visit "/users/#{user.id}/discover"
       expect(page).to have_content("Discover Your NEW Fave Movies RIGHT HERE!!!!!")
       expect(page).to have_button("Top Rated Movies")
@@ -13,7 +13,7 @@ RSpec.describe 'discover movies', type: :feature do
     end
 
     it 'top rated movies' do
-      user = User.create(name: "Jill Jillian", email: "jill@gmail.com")
+      user = User.create(name: "Jill Jillian", email: "jill@gmail.com", password: "13qe987(*&)")
 
       # VCR.use_cassette('top_rated_movies', re_record_interval: 2.days) do
         visit "/users/#{user.id}/discover"
@@ -29,7 +29,7 @@ RSpec.describe 'discover movies', type: :feature do
     end
 
     it 'search results' do
-      user = User.create(name: "Jill Jillian", email: "jill@gmail.com")
+      user = User.create(name: "Jill Jillian", email: "jill@gmail.com", password: "13qe987(*&)")
 
       # VCR.use_cassette('search_results', re_record_interval: 2.days) do
         visit "/users/#{user.id}/discover"
@@ -37,7 +37,7 @@ RSpec.describe 'discover movies', type: :feature do
         click_button 'SEARCH'
         expect(current_url).to include("/users/#{user.id}/movies?q=keyword")
         expect(page).to have_content("The Big Lebowski")
-        expect(page).to have_content("Rating: 7.9")
+        expect(page).to have_content("Rating: 7.8")
         click_button("Back to Discover")
         expect(current_path).to eq("/users/#{user.id}/discover")
       # end

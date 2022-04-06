@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'movie show page', type: :feature do
 
   it 'happy path' do
-    user = User.create(name: "Jill Jillian", email: "jill@gmail.com")
+    user = User.create(name: "Jill Jillian", email: "jill@gmail.com", password: "13qe987(*&)")
 
     visit("users/#{user.id}/movies/75780")
 

@@ -10,4 +10,8 @@ Rails.application.routes.draw do
   post "/users/:id/movies", to: "users#movies"
   get "/users/:id/movies/:movie_id", to: "users#movie_show"
 
+
+  get "login", to: "users#login_form"
+  post "login", to: "users#login_user"
+
 end

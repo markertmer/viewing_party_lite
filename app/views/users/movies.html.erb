@@ -1,6 +1,6 @@
 <h1>Your Movie Results Are Ready!</h1>
 
-<%= button_to "Back to Discover", "/users/#{@user.id}/discover", method: :get %>
+<%= button_to "Back to Discover", "/discover", method: :get %>
 
 <% @movies.each_with_index do |movie, index| %>
 <h3><%= link_to movie.title, "/users/#{@user.id}/movies/#{movie.id}" %></h3>

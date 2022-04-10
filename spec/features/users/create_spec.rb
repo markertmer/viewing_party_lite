@@ -16,7 +16,7 @@ RSpec.describe 'create a new user', type: :feature do
       fill_in("Confirm Password", with: "lkjasdfljk453789")
       click_button("Register")
       user = User.last
-      expect(current_path).to eq("/users/#{user.id}")
+      expect(current_path).to eq("/dashboard")
       expect(user.name).to eq("Biff Bliffert")
       expect(user.email).to eq("biff@bliffertsolutions.biz")
     end
@@ -35,7 +35,7 @@ RSpec.describe 'create a new user', type: :feature do
       expect(page).to have_content("ERROR: Email has already been taken")
     end
 
-    it 'email address is not unique' do
+    it 'password confirmation does not match' do
       user = User.create(name: "Jill Jillian", email: "jill@gmail.com")
       visit "/register"
       fill_in("Name", with: "Jill Jillian")

@@ -29,17 +29,20 @@ RSpec.describe 'Welcome Page', type: :feature do
     expect(page).to have_link("Mark")
     expect(page).to have_link("Joe")
 
-    click_on("Joe")
-
-    expect(current_path).to eq("/users/#{user3.id}")
+    # click_on("Joe")
+    #
+    # expect(current_path).to eq("/dashboard")
   end
 
   it 'can be navigated to from any page' do
-    user1 = User.create!(name: "Jesse", email: "jesse.owens@turing.io", password: "0")
+    User.create!(name: "Jesse", email: "jesse.owens@turing.io", password: "0")
 
-    visit "/users/#{user1.id}"
+    visit "/login"
+    fill_in("Email", with: "jesse.owens@turing.io")
+    fill_in("Password", with: "0")
+    click_button("Login")
 
-    expect(current_path).to eq("/users/#{user1.id}")
+    expect(current_path).to eq("/dashboard")
 
     click_on("Home")
 

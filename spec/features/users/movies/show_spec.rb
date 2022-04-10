@@ -1,11 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'movie show page', type: :feature do
+  before :each do
+    User.create(name: "Jill Jillian", email: "jill@gmail.com", password: "13qe987(*&)")
+    visit "/login"
+    fill_in("Email", with: "jill@gmail.com")
+    fill_in("Password", with: "13qe987(*&)")
+    click_button("Login")
+  end
 
   it 'happy path' do
-    user = User.create(name: "Jill Jillian", email: "jill@gmail.com", password: "13qe987(*&)")
-
-    visit("users/#{user.id}/movies/75780")
+    visit("/movies/75780")
 
     expect(page).to have_content("Jack Reacher")
     expect(page).to have_content("Rating: 6.6")
@@ -19,6 +24,5 @@ RSpec.describe 'movie show page', type: :feature do
 
     expect(page).to have_button("New Viewing Party")
     expect(page).to have_button("Back to Discover")
-
   end
 end

@@ -58,6 +58,5 @@ RSpec.describe 'Welcome Page', type: :feature do
     click_on("Home")
 
     expect(current_path).to eq("/")
-    # add more pages here for this test when more are built pls -Katy
   end
 end

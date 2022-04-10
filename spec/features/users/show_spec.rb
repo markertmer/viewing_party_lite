@@ -19,4 +19,13 @@ RSpec.describe 'user dashboard', type: :feature do
     click_button("Discover Movies")
     expect(current_path).to eq("/discover")
   end
+
+  it 'does not allow visitors to access the dashboard' do
+    click_on('Logout')
+    expect(current_path).to eq('/')
+
+    visit('/dashboard')
+    expect(current_path).to eq('/')
+    expect(page).to have_content('You must be logged-in to do that!')
+  end
 end
